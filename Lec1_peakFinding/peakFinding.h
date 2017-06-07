@@ -24,6 +24,6 @@ int max(int* arr, int length);
 //  bottom is the ending row of the matrix
 //  cols is the number column of the matrix
 //  function will return position of the peak
-pos_2D peak_2D(int mat[5][5], int above, int bottom, int cols);
+pos_2D peak_2D(int** mat, int above, int bottom, int cols);
 
 #endif
