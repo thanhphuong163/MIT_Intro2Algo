@@ -1,4 +1,5 @@
 #include <iostream>
+#include <time.h>
 
 using namespace std;
 
@@ -23,13 +24,15 @@ int* merge(int* Left, int* Right, int Lsize, int Rsize){
     }
     iResult++;
   }
-
+  delete[] Left;
+  delete[] Right;
   return result;
 }
 
 int* mergeSort(int* A, int n){
+  int* result = NULL;
   if(n <= 1){
-    return A;
+    result = A;
   }
   else{
     // Calculating the middle and sizes
@@ -46,10 +49,9 @@ int* mergeSort(int* A, int n){
     Right = mergeSort(Right, Rsize);
 
     // Merge
-    delete[] A;
-    return merge(Left, Right, Lsize, Rsize);
+    result =  merge(Left, Right, Lsize, Rsize);
   }
-
+  return result;
 }
 
 int main(int argc, char const *argv[]) {
