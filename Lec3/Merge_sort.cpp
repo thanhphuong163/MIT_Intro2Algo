@@ -24,9 +24,6 @@ int* merge(int* Left, int* Right, int Lsize, int Rsize){
     iResult++;
   }
 
-  // delete and return
-  delete[] Left;
-  delete[] Right;
   return result;
 }
 
@@ -69,14 +66,14 @@ int main(int argc, char const *argv[]) {
   clock_t start = clock();
 
   // Run the Algorithm
-  A = mergeSort(A, n);
+  int* result = mergeSort(A, n);
 
   // Ending counting time
   clock_t end = clock();
 
   // Output
   for (int i = 0; i < n; i++){
-    cout << A[i] << " ";
+    cout << result[i] << " ";
   }
   cout << endl;
 
@@ -84,6 +81,5 @@ int main(int argc, char const *argv[]) {
   double runningTime = ((double)(end - start) / CLOCKS_PER_SEC) * 1000;
   cout << "Running time of the Algorithm is " << runningTime << " ms" << endl;
 
-  delete[] A;
   return 0;
 }

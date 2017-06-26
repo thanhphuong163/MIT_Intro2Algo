@@ -51,6 +51,6 @@ int main(int argc, char const *argv[]) {
   double runningTime = ((double)(end - start) / CLOCKS_PER_SEC) * 1000;
   cout << "Running time of the Algorithm is " << runningTime << " ms" << endl;
 
-  delete[] A;
+  delete A;
   return 0;
 }
