@@ -3,16 +3,20 @@
 
 using namespace std;
 
-void insertionSort(int* A, int n){
+void swap(int &a, int &b){
+  int temp = a;
+  a = b;
+  b = temp;
+}
+
+void bubbleSort(int* A, int n){
   // Algorithm
-  for (int i = 1; i < n; i++){
-    int key = A[i];
-    int j = i-1;
-    while (j >= 0 && key < A[j]){
-      A[j+1] = A[j];
-      j--;
+  for (int i = 0; i < n-1; i++){
+    for (int j = i+1; j < n; j++){
+      if (A[i] > A[j]) {
+        swap(A[i], A[j]);
+      }
     }
-    A[j+1] = key;
   }
 }
 
@@ -30,7 +34,7 @@ int main(int argc, char const *argv[]) {
   clock_t start = clock();
 
   // Run the Algorithm
-  insertionSort(A, n);
+  bubbleSort(A, n);
 
   // Ending counting time
   clock_t end = clock();
