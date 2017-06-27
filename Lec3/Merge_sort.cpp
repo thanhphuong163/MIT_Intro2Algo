@@ -3,55 +3,61 @@
 
 using namespace std;
 
-int* merge(int* Left, int* Right, int Lsize, int Rsize){
-  // Create an array to return
-  int* result = new int[Lsize+Rsize];
-  int iResult = 0;
+void merge(int*& A, int left, int mid, int right) {
+  // Create temp array to store
+  int* temp = new int[right-left+1];
+  int iTemp = 0;
 
-  // Initializing index for Left and Right array
-  int iLeft = 0;
-  int iRight = 0;
+  // Initializing index
+  int i = left;
+  int j = mid+1;
 
-  // Merging
-  while (iLeft < Lsize || iRight < Rsize){
-    if(Left[iLeft] <= Right[iRight]){
-      result[iResult] = Left[iLeft];
-      iLeft++;
+  // Merge
+  while (i <= mid && j <= right){
+    if (A[i] <= A[j]) {
+      temp[iTemp] = A[i];
+      i++;
     }
-    else{
-      result[iResult] = Right[iRight];
-      iRight++;
+    else {
+      temp[iTemp] = A[j];
+      j++;
     }
-    iResult++;
+    iTemp++;
   }
-  delete[] Left;
-  delete[] Right;
-  return result;
+  while (i <= mid) {
+    temp[iTemp] = A[i];
+    i++;
+    iTemp++;
+  }
+  while (j <= right) {
+    temp[iTemp] = A[j];
+    j++;
+    iTemp++;
+  }
+
+  // Copy from temp to A
+  iTemp = 0;
+  for (int i = left; i <= right ; i++) {
+    A[i] = temp[iTemp];
+    //cout << A[i] << " ";
+    iTemp++;
+  }
+  //cout << endl;
+
+  delete[] temp;
 }
 
-int* mergeSort(int* A, int n){
-  int* result = NULL;
-  if(n <= 1){
-    result = A;
+void mergeSort(int*& A, int left, int right) {
+  if (left < right){
+    // Divide and Conquer
+    int mid = (left + right) / 2;
+    //cout << mid << endl;
+    mergeSort(A, left, mid);
+    mergeSort(A, mid+1, right);
+
+    //Merge
+    merge(A, left, mid, right);
   }
-  else{
-    // Calculating the middle and sizes
-    int mid = n/2;
-    int Lsize = n/2;
-    int Rsize = n - Lsize;
-
-    // Divide
-    int* Left = &A[0];
-    int* Right = &A[mid];
-
-    // Conquer
-    Left = mergeSort(Left, Lsize);
-    Right = mergeSort(Right, Rsize);
-
-    // Merge
-    result =  merge(Left, Right, Lsize, Rsize);
-  }
-  return result;
 }
 
 int main(int argc, char const *argv[]) {
@@ -64,18 +70,20 @@ int main(int argc, char const *argv[]) {
   for (int i = 0; i < n; i++){
     cin >> A[i];
   }
+
+  //int A [6]= {2,5,4,6,1,3};
   // Starting counting time
   clock_t start = clock();
 
   // Run the Algorithm
-  int* result = mergeSort(A, n);
+  mergeSort(A, 0, n-1);
 
   // Ending counting time
   clock_t end = clock();
 
   // Output
   for (int i = 0; i < n; i++){
-    cout << result[i] << " ";
+    cout << A[i] << " ";
   }
   cout << endl;
 
