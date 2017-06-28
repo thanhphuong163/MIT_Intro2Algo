@@ -23,7 +23,7 @@ void quickSort(int* A, int left, int right){
   while (i <= j) {
     while (A[i] < key) { i++; }   // Find A[i] >= key
     while (A[j] > key) { j--; }   // Find A[j] <= key
-    if (i < j) {
+    if (i <= j) {
       swap(A[i], A[j]);           // A[i] >= key >= A[j] then swap
       i++;
       j--;
