@@ -15,7 +15,6 @@ void quickSort(int* A, int left, int right){
   srand(time(NULL));
   int pivot = (rand() % (right-left+1)) + left; // choose randomly in interval [left,right]
   int key = A[pivot];
-  cout << key << endl;
 
   // Partition
   int i = left;
