@@ -170,8 +170,48 @@ public:
       return false;
     }
   }
-  void remove(T x) {
-
+  Node<T>* treeMin(Node<T>* node) {
+    Node<T>* p = node->right;
+    if (node != NULL) {
+      while (p->left != NULL) {
+        p = p->left;
+      }
+      return p;
+    }
+    return NULL;
+  }
+  void transPlant(Node<T>* u, Node<T>* v) {
+    if (u->parent == NULL) {
+      this->root = v;
+    }
+    else if (u == u->parent->left) {
+      u->parent->left = v;
+    }
+    else {
+      u->paretn->right = v;
+    }
+    if (v != NULL) {
+      v->parent = u->parent;
+    }
+  }
+  void remove(Node<T>* node) {
+    if (node->left == NULL) {
+      transPlant(node, node->right);
+    }
+    else if (node->right == NULL) {
+      transPlant(node, node->left);
+    }
+    else {
+      Node<T>* p = treeMin(node);
+      if (p->parent != node) {
+        transPlant(p,p->right);
+        p->right = node->right;
+        p->right->parent = p;
+      }
+      transPlant(node,p);
+      p->left = node->left;
+      p->left->parent = p;
+    }
   }
 };
 
