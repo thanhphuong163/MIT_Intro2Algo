@@ -188,7 +188,7 @@ public:
       u->parent->left = v;
     }
     else {
-      u->paretn->right = v;
+      u->parent->right = v;
     }
     if (v != NULL) {
       v->parent = u->parent;
