@@ -128,7 +128,8 @@ public:
     }
     return p;
   }
-  Node<T>* SuccessorOf(Node<T>* node) {
+  Node<T>* SuccessorOf(T x) {
+    Node<T>* node = Search(x);
     if (node->right) {
       Node<T>* rootOfSubtree = node->right;
       Tree<T>* subTree = new Tree<T>(rootOfSubtree);
@@ -142,7 +143,8 @@ public:
       return p;
     }
   }
-  Node<T>* PredecessorOf(Node<T>* node) {
+  Node<T>* PredecessorOf(T x) {
+    Node<T>* node = Search(x);
     if (node->left) {
       Node<T>* rootOfSubtree = node->left;
       Tree<T>* subTree = new Tree<T>(rootOfSubtree);
@@ -194,7 +196,8 @@ public:
       v->parent = u->parent;
     }
   }
-  void remove(Node<T>* node) {
+  void remove(T x) {
+    Node<T>* node = Search(x);
     if (node->left == NULL) {
       transPlant(node, node->right);
     }
