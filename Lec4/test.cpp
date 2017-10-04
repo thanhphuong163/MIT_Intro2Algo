@@ -15,5 +15,9 @@ int main(int argc, char const *argv[]) {
   if (tree->SuccessorOf(20)) {
     cout << tree->SuccessorOf(20)->key << endl;
   }
+  tree->Remove(20);
+  if (!tree->Search(20)) {
+    cout << "Deleted node 20" << endl;
+  }
   return 0;
 }

@@ -196,7 +196,7 @@ public:
       v->parent = u->parent;
     }
   }
-  void remove(T x) {
+  void Remove(T x) {
     Node<T>* node = Search(x);
     if (node->left == NULL) {
       transPlant(node, node->right);
